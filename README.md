@@ -2,4 +2,4 @@
 
 ### Todo
 
--[] add style to everything
+- [ ] add style to everything
