@@ -3,13 +3,14 @@ console.log("I AM MAIN.JS");
 const search = document.querySelector(".search");
 const preview = document.querySelector(".preview-container");
 
-addEventListener("submit", (event) => {
+addEventListener("submit", async (event) => {
   console.log("Submit button has been clicked");
   event.preventDefault();
   //console.log(search.value);
   deleteOldLocation();
-  getLocationsInfo(search.value);
+  await getLocationsInfo(search.value);
   console.log("done");
+  generateButtonListener();
 });
 
 function deleteOldLocation() {
@@ -17,32 +18,25 @@ function deleteOldLocation() {
 }
 
 async function getLocationsInfo(name) {
-  fetch(
+  const response = await fetch(
     `https://api.weatherapi.com/v1/search.json?key=867872936e964f17b47174912231010&q=${name}`
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      response.forEach((element) => {
-        // console.log(`${element.name}, ${element.region}, ${element.country}`);
-        getWeatherInfo(
-          `${element.name}, ${element.region}, ${element.country}`
-        );
-      });
-    });
+  );
+  const data = await response.json();
+
+  const promises = data.map((element) => {
+    return getWeatherInfo(
+      `${element.name}, ${element.region}, ${element.country}`
+    );
+  });
+  await Promise.all(promises);
 }
 
 async function getWeatherInfo(name) {
-  fetch(
+  const response = await fetch(
     `https://api.weatherapi.com/v1/forecast.json?key=867872936e964f17b47174912231010&q=${name}`
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (response) {
-      displayWeatherInfo(response);
-    });
+  );
+  const data = await response.json();
+  displayWeatherInfo(data);
 }
 
 function displayWeatherInfo(response) {
