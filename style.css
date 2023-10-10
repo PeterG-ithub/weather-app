@@ -7,10 +7,36 @@
 html,
 body {
   min-height: 100vh;
+  background: linear-gradient(to bottom, #aee4f0, #fff)
 }
 
 .item-container {
   margin: 1rem;
   padding: 1rem;
   border: 1px solid black;
+}
+
+/* nav */
+.nav-container {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* items */
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+}
+.item-container {
+  width: 100%;
+  max-width: 1200px;
+  align-self: center;
+}
+
+.select-button {
+  float: right;
 }

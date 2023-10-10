@@ -50,13 +50,14 @@ async function getDetailedWeatherInfo(name) {
 function displayWeatherInfo(response) {
   // console.log(response);
   const item = document.createElement("div");
-  item.innerHTML = `<div class="item-container">
+  item.classList.add("item-container");
+  item.innerHTML = `
     <div class="item-head"> ${response.location.name}, ${response.location.region}, ${response.location.country}</div>
     <div>${response.location.localtime}</div>
     <div class="temperature">Feels like ${response.current.feelslike_c} celsius</div>
 
     <button class="select-button">Select</button>
-  </div>`;
+  `;
   preview.appendChild(item);
 }
 

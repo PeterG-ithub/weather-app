@@ -7,20 +7,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Weather IO</h1>
-  <form>
-    <input type="text" class="search">
+  <div class="nav-container">
+    <h1 class="site-logo nav-left" >Weather IO</h1>
+    <div class="nav-center">
+      <form>
+        <input type="text" class="search">
+        <button type="submit" class="submit">Check Weather</button>
+      </form>
+    </div>
+  </div>
+  <div class="preview-container">
+    <div class="item-container">
+      <div class="item-head"> City, State, Country, Time</div>
+      <div class="temperature">Feels like Temp</div>
 
-    <button type="submit" class="submit">Check Weather</button>
-  </form>
-  <div class="preview-container"></div>
-
-  <!-- <div class="item-container">
-    <div class="item-head"> City, State, Country, Time</div>
-    <div class="temperature">Feels like Temp</div>
-
-    <button class="select-button">Select</button>
-  </div> -->
+      <button class="select-button">Select</button>
+    </div>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
