@@ -2,12 +2,14 @@ console.log("I AM MAIN.JS");
 
 const search = document.querySelector(".search");
 const preview = document.querySelector(".preview-container");
+
 addEventListener("submit", (event) => {
   console.log("Submit button has been clicked");
   event.preventDefault();
   //console.log(search.value);
   deleteOldLocation();
   getLocationsInfo(search.value);
+  console.log("done");
 });
 
 function deleteOldLocation() {
@@ -44,7 +46,7 @@ async function getWeatherInfo(name) {
 }
 
 function displayWeatherInfo(response) {
-  console.log(response);
+  // console.log(response);
   const item = document.createElement("div");
   item.innerHTML = `<div class="item-container">
     <div class="item-head"> ${response.location.name}, ${response.location.region}, ${response.location.country}, ${response.location.localtime}</div>
@@ -53,4 +55,13 @@ function displayWeatherInfo(response) {
     <button class="select-button">Select</button>
   </div>`;
   preview.appendChild(item);
+}
+
+function generateButtonListener() {
+  const selectButtons = document.querySelectorAll(".select-button");
+  selectButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log("button clicked");
+    });
+  });
 }
