@@ -33,20 +33,40 @@ async function getLocationsInfo(name) {
 
 async function getWeatherInfo(name) {
   const response = await fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=867872936e964f17b47174912231010&q=${name}`
+    `https://api.weatherapi.com/v1/current.json?key=867872936e964f17b47174912231010&q=${name}`
   );
   const data = await response.json();
   displayWeatherInfo(data);
+}
+
+async function getDetailedWeatherInfo(name) {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=867872936e964f17b47174912231010&q=${name}`
+  );
+  const data = await response.json();
+  displayDetailedWeatherInfo(data);
 }
 
 function displayWeatherInfo(response) {
   // console.log(response);
   const item = document.createElement("div");
   item.innerHTML = `<div class="item-container">
-    <div class="item-head"> ${response.location.name}, ${response.location.region}, ${response.location.country}, ${response.location.localtime}</div>
+    <div class="item-head"> ${response.location.name}, ${response.location.region}, ${response.location.country}</div>
+    <div>${response.location.localtime}</div>
     <div class="temperature">Feels like ${response.current.feelslike_c} celsius</div>
 
     <button class="select-button">Select</button>
+  </div>`;
+  preview.appendChild(item);
+}
+
+function displayDetailedWeatherInfo(response) {
+  // console.log(response);
+  const item = document.createElement("div");
+  item.innerHTML = `<div class="item-container">
+    <div class="item-head"> ${response.location.name}, ${response.location.region}, ${response.location.country}</div>
+    <div>${response.location.localtime}</div>
+    <div class="temperature">Feels like ${response.current.feelslike_c} celsius</div>
   </div>`;
   preview.appendChild(item);
 }
@@ -55,7 +75,10 @@ function generateButtonListener() {
   const selectButtons = document.querySelectorAll(".select-button");
   selectButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      console.log("button clicked");
+      console.log("select button has been pressed");
+      const head = button.parentNode.querySelector(".item-head");
+      deleteOldLocation();
+      getDetailedWeatherInfo(head.textContent);
     });
   });
 }
