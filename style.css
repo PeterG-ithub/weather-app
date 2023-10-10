@@ -8,3 +8,9 @@ html,
 body {
   min-height: 100vh;
 }
+
+.item-container {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+}
